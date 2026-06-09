@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vows3D - Aplikasi Undangan Digital 3D Interaktif</title>
+    <meta name="description" content="Platform pembuatan undangan digital interaktif dengan visualisasi 3D modern. Kelola data undangan, daftar tamu, dan kustomisasi desain secara langsung.">
+    <meta name="keywords" content="undangan digital 3d, undangan online interaktif, vows3d, wedding invitation 3d, buat undangan pernikahan, e-commerce undangan">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/svgs/solid/envelope-open-text.svg" type="image/svg+xml">
+    
+    <style>
+        /* Reset CSS dasar agar iframe memenuhi layar */
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            background-color: #0b0f19; /* Menyesuaikan warna latar belakang Vows3D */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        #appsScriptFrame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* Styling overlay pemuatan */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #0b0f19;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+
+        /* Spinner kustom dengan aksen emas/amber */
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(245, 158, 11, 0.1);
+            border-radius: 50%;
+            border-top-color: #f59e0b; /* Warna Amber */
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        .loading-text {
+            color: #94a3b8;
+            margin-top: 20px;
+            font-size: 14px;
+            letter-spacing: 0.05em;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Overlay Pemuatan -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <div class="loading-text">Memuat Ruang Kreatif Vows3D...</div>
+    </div>
+    
+    <!-- GANTI URL DI BAWAH INI DENGAN URL WEB APP GOOGLE APPS SCRIPT ANDA -->
+    <iframe 
+        id="appsScriptFrame" 
+        src="https://script.google.com/macros/s/AKfycby5iOsuJc336K6xr5QHA0r5A3Xc2xp5Yk6Phdgwhbr3R6N8623hvuqU2Bis7_fnuC0dUw/exec" 
+        title="Vows3D - Undangan Digital 3D"
+        allow="camera; microphone; geolocation">
+    </iframe>
+
+    <script>
+        const iframe = document.getElementById('appsScriptFrame');
+        const overlay = document.getElementById('loadingOverlay');
+
+        // Menyembunyikan overlay setelah iframe selesai dimuat sepenuhnya
+        iframe.addEventListener('load', () => {
+            overlay.style.opacity = '0';
+            setTimeout(() => {
+                overlay.style.display = 'none';
+            }, 500); // Sinkron dengan transisi CSS
+        });
+    </script>
+</body>
+</html>
