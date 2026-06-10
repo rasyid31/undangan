@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vows3D - Aplikasi Undangan Digital 3D Interaktif</title>
-    <meta name="description" content="Platform pembuatan undangan digital interaktif dengan visualisasi 3D modern. Kelola data undangan, daftar tamu, dan kustomisasi desain secara langsung.">
-    <meta name="keywords" content="undangan digital 3d, undangan online interaktif, vows3d, wedding invitation 3d, buat undangan pernikahan, e-commerce undangan">
+    <title>IrisInvite - Platform Undangan Digital Premium</title>
+    <meta name="description" content="Platform pembuatan undangan digital interaktif dengan visualisasi modern bertema dark iridescent. Kelola data undangan, daftar tamu, dan verifikasi kehadiran secara langsung.">
+    <meta name="keywords" content="undangan digital, undangan online iridescent, irisinvite, wedding invitation dark, buat undangan pernikahan, e-commerce undangan, qr code tamu">
     
-    <!-- Favicon -->
-    <link rel="icon" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/svgs/solid/envelope-open-text.svg" type="image/svg+xml">
+    <!-- Favicon menggunakan ikon Sparkles bertema Iridescent -->
+    <link rel="icon" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/svgs/solid/wand-magic-sparkles.svg" type="image/svg+xml">
     
     <style>
-        /* Reset CSS dasar agar iframe memenuhi layar */
+        /* Reset CSS dasar agar iframe memenuhi layar secara penuh */
         html, body {
             margin: 0;
             padding: 0;
             overflow: hidden;
             width: 100%;
             height: 100%;
-            background-color: #0b0f19; /* Menyesuaikan warna latar belakang Vows3D */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #090a0f; /* Menyesuaikan warna latar belakang IrisInvite */
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
         }
         
         #appsScriptFrame {
@@ -29,37 +29,60 @@
             display: block;
         }
 
-        /* Styling overlay pemuatan */
+        /* Styling overlay pemuatan bertema Dark Iridescent */
         .loading-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #0b0f19;
+            background-color: #090a0f;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 9999;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* Spinner kustom dengan aksen emas/amber */
+        /* Spinner kustom dengan efek gradasi pendaran (Iridescent Glow) */
+        .spinner-container {
+            position: relative;
+            width: 60px;
+            height: 60px;
+        }
+
         .spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(245, 158, 11, 0.1);
+            width: 100%;
+            height: 100%;
+            border: 3px solid rgba(255, 0, 127, 0.1);
             border-radius: 50%;
-            border-top-color: #f59e0b; /* Warna Amber */
-            animation: spin 1s ease-in-out infinite;
+            border-top-color: #7f00ff; /* Ungu */
+            border-right-color: #ff007f; /* Merah Muda */
+            border-bottom-color: #00f0ff; /* Sian */
+            animation: spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+            box-shadow: 0 0 20px rgba(127, 0, 255, 0.2);
         }
 
         .loading-text {
             color: #94a3b8;
-            margin-top: 20px;
+            margin-top: 24px;
             font-size: 14px;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* Efek pendaran statis di belakang spinner */
+        .glow-effect {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, rgba(127, 0, 255, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            pointer-events: none;
         }
 
         @keyframes spin {
@@ -71,28 +94,31 @@
 
     <!-- Overlay Pemuatan -->
     <div id="loadingOverlay" class="loading-overlay">
-        <div class="spinner"></div>
-        <div class="loading-text">Memuat Ruang Kreatif Vows3D...</div>
+        <div class="glow-effect"></div>
+        <div class="spinner-container">
+            <div class="spinner"></div>
+        </div>
+        <div class="loading-text">Memuat Pengalaman IrisInvite...</div>
     </div>
     
-    <!-- GANTI URL DI BAWAH INI DENGAN URL WEB APP GOOGLE APPS SCRIPT ANDA -->
+    <!-- Iframe yang terhubung ke Web App Google Apps Script -->
     <iframe 
         id="appsScriptFrame" 
         src="https://script.google.com/macros/s/AKfycby5iOsuJc336K6xr5QHA0r5A3Xc2xp5Yk6Phdgwhbr3R6N8623hvuqU2Bis7_fnuC0dUw/exec" 
-        title="Vows3D - Undangan Digital 3D"
-        allow="camera; microphone; geolocation">
+        title="IrisInvite - Premium Digital Invitation"
+        allow="camera; microphone; geolocation; autoplay">
     </iframe>
 
     <script>
         const iframe = document.getElementById('appsScriptFrame');
         const overlay = document.getElementById('loadingOverlay');
 
-        // Menyembunyikan overlay setelah iframe selesai dimuat sepenuhnya
+        // Menyembunyikan overlay transisi setelah halaman Google Apps Script dimuat
         iframe.addEventListener('load', () => {
             overlay.style.opacity = '0';
             setTimeout(() => {
                 overlay.style.display = 'none';
-            }, 500); // Sinkron dengan transisi CSS
+            }, 600); // Sinkron dengan durasi transisi CSS
         });
     </script>
 </body>
